@@ -1,0 +1,4 @@
+Book Title,Author,ISBN,Category,Publisher,Total Copies
+"""The Great Gatsby""","""F. Scott Fitzgerald""","""9780743273565""","""Fiction > Classics""","""Scribner""",5
+"""Clean Code""","""Robert C. Martin""","""9780132350884""","""Programming > Software Engineering""","""Pearson""",15
+"""Data Science Handbook""","""Jake VanderPlas""","""9781491912057""","""Computer Science > Data Science""","""O'Reilly""",8

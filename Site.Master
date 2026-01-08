@@ -1,0 +1,338 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="LibraryManagementSystem.Site" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <title>Library Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    
+
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --hover-color: #e74c3c;
+            --text-light: #ecf0f1;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem;
+            
+        }
+        .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+
+        .navbar-brand img {
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--accent-color) !important;
+            color: white;
+        }
+
+        .page-content {
+            flex: 1;
+            padding: 2rem;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .form-control {
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+        }
+        
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+
+        <!-- Navbar -->
+       <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="Dashboard.aspx">
+                    <img src="Library.png " alt="Library Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Dashboard.aspx"><i class="fas fa-home"></i> Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="BookList.aspx"><i class="fas fa-book"></i> Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="MemberManagement.aspx"><i class="fas fa-users"></i> Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="TransactionManagement.aspx"><i class="fas fa-exchange-alt"></i> Transactions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Reports.aspx"><i class="fas fa-chart-line"></i> Reports</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> 
+                                <asp:Label ID="lblUserFullName" runat="server" Text="Admin" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                    <i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                    <i class="fas fa-lock"></i> Change Password</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item text-danger" 
+                                        OnClick="btnLogout_Click">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="page-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div class="modal fade" id="editProfileModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFullName" 
+                                ValidationGroup="ProfileValidation" CssClass="text-danger"
+                                ErrorMessage="Full name is required." Display="Dynamic" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" 
+                                ValidationGroup="ProfileValidation" CssClass="text-danger"
+                                ErrorMessage="Email is required." Display="Dynamic" />
+                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail"
+                                ValidationGroup="ProfileValidation" CssClass="text-danger"
+                                ErrorMessage="Invalid email format."
+                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <asp:Button ID="btnUpdateProfile" runat="server" Text="Save Changes" 
+                            CssClass="btn btn-primary" OnClick="btnUpdateProfile_Click" 
+                            ValidationGroup="ProfileValidation" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password Modal -->
+        <div class="modal fade" id="changePasswordModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Current Password</label>
+                            <asp:TextBox ID="txtCurrentPassword" runat="server" TextMode="Password" 
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCurrentPassword" 
+                                ValidationGroup="PasswordValidation" CssClass="text-danger"
+                                ErrorMessage="Current password is required." Display="Dynamic" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" 
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNewPassword" 
+                                ValidationGroup="PasswordValidation" CssClass="text-danger"
+                                ErrorMessage="New password is required." Display="Dynamic" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm New Password</label>
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" 
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtConfirmPassword" 
+                                ValidationGroup="PasswordValidation" CssClass="text-danger"
+                                ErrorMessage="Confirm password is required." Display="Dynamic" />
+                            <asp:CompareValidator runat="server" ControlToValidate="txtConfirmPassword" 
+                                ControlToCompare="txtNewPassword" ValidationGroup="PasswordValidation" 
+                                CssClass="text-danger" ErrorMessage="Passwords do not match." Display="Dynamic" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" 
+                            CssClass="btn btn-primary" OnClick="btnChangePassword_Click" 
+                            ValidationGroup="PasswordValidation" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <h5>Library Management System</h5>
+                        <p class="mb-0">© <%= DateTime.Now.Year %> All rights reserved.</p>
+                    </div>
+                   
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </form>
+</body>
+</html>
